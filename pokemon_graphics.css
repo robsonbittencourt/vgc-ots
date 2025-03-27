@@ -1,0 +1,35 @@
+
+/* Style for the container div */
+.pokemon-container {
+  display: flex;
+  gap: 1px; /* Add space between Pokémon */
+  position: absolute;
+  left: 640px;
+  top: 13px;
+  z-index: 10;
+}
+
+/* Style for individual Pokémon cards */
+.pokemon-card {
+  padding: 1px;
+  width: 80px; /* Adjust the width as needed */
+}
+
+.image-container {
+  position: relative;
+}
+} /* No idea why this random bracket is required but I need it to make it work */
+
+.poke-image {
+  position: absolute;
+  top: 0px; /* Adjust the positioning as needed */
+  left: 0px; /* Adjust the positioning as needed */
+  z-index: 0; /* Lower z-index to place it below the first image */
+}
+
+.item-image {
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  z-index: 1; /* Higher z-index to place it above the second image */
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokemon Showdown Extension</title>
+  <style>
+    body { width: 200px; padding: 10px; font-family: Arial, sans-serif; }
+    button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h3>Pokemon Showdown</h3>
+  <button id="injectButton">Inject Content Script</button>
+  <script>
+    document.getElementById('injectButton').addEventListener('click', () => {
+      chrome.tabs.executeScript({
+        file: 'content.js'
+      });
+    });
+  </script>
+</body>
+</html>

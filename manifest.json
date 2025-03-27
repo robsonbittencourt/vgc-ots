@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Pokemon Showdown Extension",
+  "version": "1.0",
+  "description": "A simple extension to interact with Pokemon Showdown.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://play.pokemonshowdown.com/*"],
+      "js": ["content.js", "image_namer.js"],
+      "css": ["pokemon_graphics.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
