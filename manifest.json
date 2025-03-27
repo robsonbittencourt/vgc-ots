@@ -10,11 +10,11 @@
   "content_scripts": [
     {
       "matches": ["https://play.pokemonshowdown.com/*"],
-      "js": ["content.js", "image_namer.js"],
-      "css": ["pokemon_graphics.css"]
+      "js": ["src/scripts/content.js", "src/scripts/image_namer.js"],
+      "css": ["src/pokemon_graphics.css"]
     }
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "src/popup.html"
   }
 }
