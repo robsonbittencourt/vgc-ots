@@ -1,9 +1,9 @@
-import template from '../ots-component.handlebars';
+import template from '../ots-component.handlebars'
 
 export async function createOpenTeamSheetElement(pokemon_team) {
-  const pokemonList = document.createElement('div');
-  pokemonList.className = "pokemon-container";
-  pokemonList.style.padding = '10px';
+  const pokemonList = document.createElement('div')
+  pokemonList.className = "pokemon-container"
+  pokemonList.style.padding = '10px'
 
   const pokemonData = pokemon_team.map(pokemon => ({
     imlink: linkImage(pokemon.name),
@@ -18,47 +18,47 @@ export async function createOpenTeamSheetElement(pokemon_team) {
     move4: pokemon.move4,
     name: pokemon.name,
     item: pokemon.item,
-  }));
+  }))
 
-  const pokemonHtml = template({ pokemon_team: pokemonData });
-  pokemonList.innerHTML = pokemonHtml;
+  const pokemonHtml = template({ pokemon_team: pokemonData })
+  pokemonList.innerHTML = pokemonHtml
 
-  return pokemonList;
+  return pokemonList
 }
 
 function linkImage(name) {
-  var imname = name.toLowerCase();
-  imname = imname.replace(' ', '-').replace(')', '').replace('(', '');
-  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '');
-  imname = imname.replace('-alola', '-alolan');
+  var imname = name.toLowerCase()
+  imname = imname.replace(' ', '-').replace(')', '').replace('(', '')
+  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '')
+  imname = imname.replace('-alola', '-alolan')
 
   if (imname.includes("sinistcha")) {
-    return "https://img.game8.co/3763925/f08cd2e93762e07532cf393e899eb0c0.png/show";
+    return "https://img.game8.co/3763925/f08cd2e93762e07532cf393e899eb0c0.png/show"
   }
 
-  var imlink = "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imname + ".png";
+  var imlink = "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imname + ".png"
   if (name.includes("hisui") || name.includes("galar")) {
-    imlink = "https://img.pokemondb.net/sprites/home/normal/2x/avif/" + imname + "an.avif";
+    imlink = "https://img.pokemondb.net/sprites/home/normal/2x/avif/" + imname + "an.avif"
   } else if (name.includes("Ogerpon")) {
-    imlink = "https://img.pokemondb.net/artwork/avif/ogerpon-teal.avif";
+    imlink = "https://img.pokemondb.net/artwork/avif/ogerpon-teal.avif"
   }
 
-  return imlink;
+  return imlink
 }
 
 function linkBackup(name) {
-  var imname = name.toLowerCase();
-  imname = imname.replace(' ', '-').replace(')', '').replace('(', '');
-  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '');
-  imname = imname.replace('-alola', '-alolan');
+  var imname = name.toLowerCase()
+  imname = imname.replace(' ', '-').replace(')', '').replace('(', '')
+  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '')
+  imname = imname.replace('-alola', '-alolan')
 
-  var backuplink = "https://img.pokemondb.net/sprites/home/normal/2x/" + imname + ".jpg";
-  return backuplink;
+  var backuplink = "https://img.pokemondb.net/sprites/home/normal/2x/" + imname + ".jpg"
+  return backuplink
 }
 
 function linkItem(name) {
-  var itemlink = "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(' ', '').toLowerCase() + ".png";
-  return itemlink;
+  var itemlink = "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(' ', '').toLowerCase() + ".png"
+  return itemlink
 }
 
 function colorType(type) {
@@ -87,8 +87,8 @@ function colorType(type) {
   }
 
   if (type in type_colors) {
-    return "#" + type_colors[type];
+    return "#" + type_colors[type]
   } else {
-    return "#AAAAAA";
+    return "#AAAAAA"
   }
 }
