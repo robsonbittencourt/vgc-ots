@@ -1,3 +1,5 @@
+import { colorType, linkBackup, linkImage, linkItem } from './image_namer.js';
+
 function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
     var user_selector = 'span.usernametext';
