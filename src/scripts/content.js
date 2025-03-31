@@ -4,7 +4,7 @@ import { parseTeamSheet } from './team-sheet-parser.js';
 function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
     var user_selector = 'span.usernametext';
-    var teambox_selector = teamBoxSelector();
+    var teambox_selector = '.infobox';
 
     waitForElm(user_selector).then((elm) => {
       var userObj = document.querySelector(user_selector).textContent;
@@ -44,21 +44,6 @@ function updateTeamsheet() {
   }
 }
 
-function add_accept_listener() {
-  var accept_teamsheet_button_selector = 'button[value="/acceptopenteamsheets"]';
-  waitForElm(accept_teamsheet_button_selector).then((elm) => {
-    var buttons = document.querySelectorAll(accept_teamsheet_button_selector);
-
-    for (var i = 0; i < buttons.length; i++) {
-      button = buttons[i];
-
-      button.addEventListener('click', function () {
-        updateTeamsheet();
-      });
-    }
-  });
-}
-
 function waitForElm(selector) {
   return new Promise(resolve => {
     if (document.querySelector(selector)) {
@@ -92,15 +77,4 @@ function battleLogElement(container) {
   return container.parentNode.parentNode.parentNode
 }
 
-function teamBoxSelector() {
-  var teambox_selector = '.notice.uhtml-ots .infobox';
-
-  if (window.location.toString().includes("bo3")) {
-    teambox_selector = '.infobox';
-  }
-
-  return teambox_selector;
-}
-
 setInterval(updateTeamsheet, 2000);
-add_accept_listener();
