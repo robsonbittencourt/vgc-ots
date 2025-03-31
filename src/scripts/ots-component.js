@@ -1,9 +1,32 @@
+import template from '../ots-component.handlebars';
 
+export async function createOpenTeamSheetElement(pokemon_team) {
+  const pokemonList = document.createElement('div');
+  pokemonList.className = "pokemon-container";
+  pokemonList.style.padding = '10px';
 
-// Script to put an image URL for every Pokemon name. To be used by multiple PokeStats scripts
-export function linkImage(name) {
+  const pokemonData = pokemon_team.map(pokemon => ({
+    imlink: linkImage(pokemon.name),
+    backuplink: linkBackup(pokemon.name),
+    itemlink: linkItem(pokemon.item),
+    teracolor: colorType(pokemon.tera),
+    tera: pokemon.tera,
+    ability: pokemon.ability,
+    move1: pokemon.move1,
+    move2: pokemon.move2,
+    move3: pokemon.move3,
+    move4: pokemon.move4,
+    name: pokemon.name,
+    item: pokemon.item,
+  }));
 
-  // Find Image link
+  const pokemonHtml = template({ pokemon_team: pokemonData });
+  pokemonList.innerHTML = pokemonHtml;
+
+  return pokemonList;
+}
+
+function linkImage(name) {
   var imname = name.toLowerCase();
   imname = imname.replace(' ', '-').replace(')', '').replace('(', '');
   imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '');
@@ -23,28 +46,22 @@ export function linkImage(name) {
   return imlink;
 }
 
-
-// Script for an alternative source if linkImage is down
-export function linkBackup(name) {
+function linkBackup(name) {
   var imname = name.toLowerCase();
   imname = imname.replace(' ', '-').replace(')', '').replace('(', '');
   imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '');
   imname = imname.replace('-alola', '-alolan');
-  //var backuplink = "https://img.pokemondb.net/artwork/large/"+imname+".jpg";
+
   var backuplink = "https://img.pokemondb.net/sprites/home/normal/2x/" + imname + ".jpg";
   return backuplink;
 }
 
-
-// Script to find an item URL
-export function linkItem(name) {
+function linkItem(name) {
   var itemlink = "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(' ', '').toLowerCase() + ".png";
   return itemlink;
 }
 
-
-// Function to return a type color
-export function colorType(type) {
+function colorType(type) {
   const type_colors = {
     'Normal': 'A8A77A',
     'Fire': 'EE8130',

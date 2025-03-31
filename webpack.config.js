@@ -12,6 +12,9 @@ module.exports = {
       {
         test: /\.handlebars$/,
         loader: 'handlebars-loader',
+        options: {
+          precompile: true
+        }
       },
     ],
   },

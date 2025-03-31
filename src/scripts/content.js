@@ -1,4 +1,4 @@
-import { colorType, linkBackup, linkImage, linkItem } from './image_namer.js';
+import { createOpenTeamSheetElement } from './ots-component.js';
 
 function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
@@ -9,7 +9,7 @@ function updateTeamsheet() {
       var userObj = document.querySelector(user_selector).textContent;
       var user = userObj.substring(1, userObj.length);
 
-      waitForElm(teambox_selector).then((elm) => {
+      waitForElm(teambox_selector).then(async (elm) => {
         var pokemonContainers = document.querySelectorAll(teambox_selector);
 
         for (var j = 0; j < pokemonContainers.length; j++) {
@@ -31,7 +31,7 @@ function updateTeamsheet() {
               var enemysheet = teamsheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>');
 
               var pokemon_team = parseTeamSheet(enemysheet);
-              var openTeamSheetElement = createOpenTeamSheetElement(pokemon_team);
+              var openTeamSheetElement = await createOpenTeamSheetElement(pokemon_team);
 
               var battleLog = battleLogElement(container);
               battleLog.parentNode.insertBefore(openTeamSheetElement, battleLog);
@@ -151,39 +151,6 @@ function parseTeamSheet(enemysheet) {
   }
 
   return pokemon_team;
-}
-
-function createOpenTeamSheetElement(pokemon_team) {
-  var pokemonList = document.createElement('div');
-  pokemonList.innerHTML = '';
-  pokemonList.className = "pokemon-container";
-  pokemonList.style.padding = '10px';
-
-  for (const pokemon of pokemon_team) {
-    const pokemonDiv = document.createElement('div');
-
-    var imlink = linkImage(pokemon.name);
-    var backuplink = linkBackup(pokemon.name);
-    var itemlink = linkItem(pokemon.item);
-    var teracolor = colorType(pokemon.tera);
-
-    pokemonDiv.className = 'pokemon-card';
-    pokemonDiv.innerHTML = `
-      <div class="image-container" width=80px height=80px>
-        <img src=${imlink} alt=${pokemon.name} onerror="if (this.src!='${backuplink}') this.src='${backuplink}';" width=80px height=80px class=poke-image>
-        <img src=${itemlink} alt=${pokemon.item} width=30px height=32px class=item-image>
-      </div>
-      <p style="background-color:${teracolor}">${pokemon.tera}</p>
-      <p style="margin-bottom:2px;font-size:10px"><strong>${pokemon.ability}</strong></p>
-      <p style="margin-bottom:2px;font-size:10px">${pokemon.move1}</p>
-      <p style="margin-bottom:2px;font-size:10px">${pokemon.move2}</p>
-      <p style="margin-bottom:2px;font-size:10px">${pokemon.move3}</p>
-      <p style="margin-bottom:2px;font-size:10px">${pokemon.move4}</p>
-    `;
-    pokemonList.appendChild(pokemonDiv);
-  }
-
-  return pokemonList;
 }
 
 function repositionsOriginalElements(container) {

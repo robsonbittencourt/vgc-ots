@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A extension to show Open Team Sheat in Pokémon Showdown",
   "main": "index.js",
-  
   "scripts": {
     "build": "webpack"
   },
