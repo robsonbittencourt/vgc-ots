@@ -1,14 +1,14 @@
 {{#each pokemonList}}
   <div class="pokemon-card">
-    <div class="image-container" width="80px" height="80px">
-      <img src="{{imageLink}}" alt="{{name}}" width="80px" height="80px">
-      <img src="{{itemLink}}" alt="{{item}}" width="30px" height="32px" class="item-image">
+    <div class="image-container">
+      <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image">
+      <img src="{{itemLink}}" alt="{{item}}" class="item-image">
     </div>
     <p style="background-color:{{teraColor}}">{{tera}}</p>
-    <p style="margin-bottom:2px;font-size:10px"><strong>{{ability}}</strong></p>
-    <p style="margin-bottom:2px;font-size:10px">{{move1}}</p>
-    <p style="margin-bottom:2px;font-size:10px">{{move2}}</p>
-    <p style="margin-bottom:2px;font-size:10px">{{move3}}</p>
-    <p style="margin-bottom:2px;font-size:10px">{{move4}}</p>
+    <p class="ability"><strong>{{ability}}</strong></p>
+    <p class="move">{{move1}}</p>
+    <p class="move">{{move2}}</p>
+    <p class="move">{{move3}}</p>
+    <p class="move">{{move4}}</p>
   </div>
 {{/each}}

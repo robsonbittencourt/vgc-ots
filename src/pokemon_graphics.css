@@ -15,6 +15,13 @@
 
 .image-container {
   position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.pokemon-image {
+  width: 80px;
+  height: 80px;
 }
 
 .item-image {
@@ -22,4 +29,12 @@
   top: 0px;
   left: 40px;
   z-index: 1;
+  width: 30px;
+  height: 32px;
+}
+
+.ability, 
+.move {
+  margin-bottom: 2px;
+  font-size:10px;
 }
