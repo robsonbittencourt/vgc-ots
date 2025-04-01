@@ -1,56 +1,60 @@
 import { createOpenTeamSheetElement } from './ots-component.js';
 import { parseTeamSheet } from './team-sheet-parser.js';
 
-function updateTeamsheet() {
+async function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
-    var user_selector = 'span.usernametext'
-    var teambox_selector = '.infobox'
+    var userName = await getUsername()
+    var containers = await getContainers()
 
-    waitForElm(user_selector).then((elm) => {
-      var userObj = document.querySelector(user_selector).textContent
-      var user = userObj.substring(1, userObj.length)
+    for (var j = 0; j < containers.length; j++) {
+      var container = containers[j]
 
-      waitForElm(teambox_selector).then(async (elm) => {
-        var pokemonContainers = document.querySelectorAll(teambox_selector)
+      if (container.hasAttribute("value") != true) {
+        container.setAttribute("value", "done")
+        container.style.borderRight = "none"
 
-        for (var j = 0; j < pokemonContainers.length; j++) {
-          var container = pokemonContainers[j]
+        var teamsheet = container.querySelector('details')
 
-          if (container.hasAttribute("value") != true) {
-            container.setAttribute("value", "done")
-            container.style.borderRight = "none"
+        if (teamsheet == null) return
 
-            var teamsheet = container.querySelector('details')
+        var team_user = teamsheet.textContent.split('Open Team Sheet for ')[1].substring(0, userName.length)
 
-            if (teamsheet == null) return
+        if (team_user != userName) {
+          repositionsOriginalElements(container)
 
-            var team_user = teamsheet.textContent.split('Open Team Sheet for ')[1].substring(0, user.length)
+          var enemysheet = teamsheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>')
 
-            if (team_user != user) {
-              repositionsOriginalElements(container)
+          var pokemon_team = parseTeamSheet(enemysheet)
+          var openTeamSheetElement = await createOpenTeamSheetElement(pokemon_team)
 
-              var enemysheet = teamsheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>')
-
-              var pokemon_team = parseTeamSheet(enemysheet)
-              var openTeamSheetElement = await createOpenTeamSheetElement(pokemon_team)
-
-              var battleLog = battleLogElement(container)
-              battleLog.parentNode.insertBefore(openTeamSheetElement, battleLog)
-            }
-          }
+          var battleLog = battleLogElement(container)
+          battleLog.parentNode.insertBefore(openTeamSheetElement, battleLog)
         }
-      });
-    });
+      }
+    }
   }
 }
 
-function waitForElm(selector) {
+async function getUsername() {
+  const userNameElement = await waitForElm('span.usernametext')
+
+  return userNameElement.textContent.trim()
+}
+
+async function getContainers() {
+  var teamboxSelector = '.infobox'
+  await waitForElm(teamboxSelector)
+
+  return document.querySelectorAll(teamboxSelector)
+}
+
+async function waitForElm(selector) {
   return new Promise(resolve => {
     if (document.querySelector(selector)) {
       return resolve(document.querySelector(selector))
     }
 
-    const observer = new MutationObserver(mutations => {
+    const observer = new MutationObserver(() => {
       if (document.querySelector(selector)) {
         observer.disconnect();
         resolve(document.querySelector(selector))
@@ -60,8 +64,8 @@ function waitForElm(selector) {
     observer.observe(document.body, {
       childList: true,
       subtree: true
-    });
-  });
+    })
+  })
 }
 
 function repositionsOriginalElements(container) {
@@ -77,4 +81,9 @@ function battleLogElement(container) {
   return container.parentNode.parentNode.parentNode
 }
 
-setInterval(updateTeamsheet, 2000)
+async function runUpdate() {
+  await updateTeamsheet()
+  setTimeout(runUpdate, 2000)
+}
+
+runUpdate()
