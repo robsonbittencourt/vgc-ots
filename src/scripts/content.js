@@ -21,14 +21,14 @@ async function updateTeamsheet() {
 }
 
 async function getUsername() {
-  const userNameElement = await waitForElm('span.usernametext')
+  const userNameElement = await waitForElement('span.usernametext')
 
   return userNameElement.textContent.trim()
 }
 
 async function getOpponentContainer(userName) {
   var teamboxSelector = '.infobox'
-  await waitForElm(teamboxSelector)
+  await waitForElement(teamboxSelector)
 
   var constainers = Array.from(document.querySelectorAll(teamboxSelector))
 
@@ -62,7 +62,7 @@ function battleLogElement(container) {
   return container.parentNode.parentNode.parentNode
 }
 
-async function waitForElm(selector) {
+async function waitForElement(selector) {
   return new Promise(resolve => {
     if (document.querySelector(selector)) {
       return resolve(document.querySelector(selector))
@@ -84,7 +84,7 @@ async function waitForElm(selector) {
 
 async function runUpdate() {
   await updateTeamsheet()
-  setTimeout(runUpdate, 1000)
+  setTimeout(runUpdate, 2000)
 }
 
 runUpdate()
