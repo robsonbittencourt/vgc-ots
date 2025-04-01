@@ -1,10 +1,10 @@
 {{#each pokemonList}}
   <div class="pokemon-card">
     <div class="image-container" width="80px" height="80px">
-      <img src="{{imlink}}" alt="{{name}}" onerror="if (this.src!='{{backuplink}}') this.src='{{backuplink}}';" width="80px" height="80px">
-      <img src="{{itemlink}}" alt="{{item}}" width="30px" height="32px" class="item-image">
+      <img src="{{imageLink}}" alt="{{name}}" width="80px" height="80px">
+      <img src="{{itemLink}}" alt="{{item}}" width="30px" height="32px" class="item-image">
     </div>
-    <p style="background-color:{{teracolor}}">{{tera}}</p>
+    <p style="background-color:{{teraColor}}">{{tera}}</p>
     <p style="margin-bottom:2px;font-size:10px"><strong>{{ability}}</strong></p>
     <p style="margin-bottom:2px;font-size:10px">{{move1}}</p>
     <p style="margin-bottom:2px;font-size:10px">{{move2}}</p>

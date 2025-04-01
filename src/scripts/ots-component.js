@@ -3,13 +3,11 @@ import template from '../ots-component.handlebars'
 export async function createOpenTeamSheetElement(team) {
   const otsContainerElement = document.createElement('div')
   otsContainerElement.className = "pokemon-container"
-  otsContainerElement.style.padding = '10px'
 
   const pokemonList = team.map(pokemon => ({
-    imlink: linkImage(pokemon.name),
-    backuplink: linkBackup(pokemon.name),
-    itemlink: linkItem(pokemon.item),
-    teracolor: colorType(pokemon.teraType),
+    imageLink: imageLink(pokemon.name),
+    itemLink: itemLink(pokemon.item),
+    teraColor: colorType(pokemon.teraType),
     tera: pokemon.teraType,
     ability: pokemon.ability,
     move1: pokemon.moves[0],
@@ -26,39 +24,26 @@ export async function createOpenTeamSheetElement(team) {
   return otsContainerElement
 }
 
-function linkImage(name) {
-  var imname = name.toLowerCase()
-  imname = imname.replace(' ', '-').replace(')', '').replace('(', '')
-  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '')
-  imname = imname.replace('-alola', '-alolan')
+function imageLink(name) {
+  var imageName = name.toLowerCase()
+  imageName = imageName.replace(' ', '-')
+  imageName = imageName.replace('calyrex-shadow', 'calyrex-shadow-rider')
+  imageName = imageName.replace('calyrex-ice', 'calyrex-ice-rider')
+  imageName = imageName.replace(/-f$/, '-female')
+  imageName = imageName.replace('-hisui', '-hisuian')
+  imageName = imageName.replace('-alola', '-alolan')
+  imageName = imageName.replace('-galar', '-galarian')
+  imageName = imageName.replace('rockruff-dusk', 'rockruff')
+  imageName = imageName.replace('polteageist-antique', 'polteageist')
+  imageName = imageName.replace('urshifu-rapid-strike', 'urshifu')
 
-  if (imname.includes("sinistcha")) {
-    return "https://img.game8.co/3763925/f08cd2e93762e07532cf393e899eb0c0.png/show"
-  }
-
-  var imlink = "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imname + ".png"
-  if (name.includes("hisui") || name.includes("galar")) {
-    imlink = "https://img.pokemondb.net/sprites/home/normal/2x/avif/" + imname + "an.avif"
-  } else if (name.includes("Ogerpon")) {
-    imlink = "https://img.pokemondb.net/artwork/avif/ogerpon-teal.avif"
-  }
-
-  return imlink
+  return "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imageName + ".png"
 }
 
-function linkBackup(name) {
-  var imname = name.toLowerCase()
-  imname = imname.replace(' ', '-').replace(')', '').replace('(', '')
-  imname = imname.replace('-f', '-female').replace('-bloodmoon', '').replace('-rapid-strike', '')
-  imname = imname.replace('-alola', '-alolan')
-
-  var backuplink = "https://img.pokemondb.net/sprites/home/normal/2x/" + imname + ".jpg"
-  return backuplink
-}
-
-function linkItem(name) {
-  var itemlink = "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(' ', '').toLowerCase() + ".png"
-  return itemlink
+function itemLink(name) {
+  if (name) {
+    return "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(' ', '').toLowerCase() + ".png"
+  }
 }
 
 function colorType(type) {
