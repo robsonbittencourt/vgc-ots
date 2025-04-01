@@ -1,29 +1,29 @@
 import template from '../ots-component.handlebars'
 
-export async function createOpenTeamSheetElement(pokemon_team) {
-  const pokemonList = document.createElement('div')
-  pokemonList.className = "pokemon-container"
-  pokemonList.style.padding = '10px'
+export async function createOpenTeamSheetElement(team) {
+  const otsContainerElement = document.createElement('div')
+  otsContainerElement.className = "pokemon-container"
+  otsContainerElement.style.padding = '10px'
 
-  const pokemonData = pokemon_team.map(pokemon => ({
+  const pokemonList = team.map(pokemon => ({
     imlink: linkImage(pokemon.name),
     backuplink: linkBackup(pokemon.name),
     itemlink: linkItem(pokemon.item),
-    teracolor: colorType(pokemon.tera),
-    tera: pokemon.tera,
+    teracolor: colorType(pokemon.teraType),
+    tera: pokemon.teraType,
     ability: pokemon.ability,
-    move1: pokemon.move1,
-    move2: pokemon.move2,
-    move3: pokemon.move3,
-    move4: pokemon.move4,
+    move1: pokemon.moves[0],
+    move2: pokemon.moves[1],
+    move3: pokemon.moves[2],
+    move4: pokemon.moves[3],
     name: pokemon.name,
     item: pokemon.item,
   }))
 
-  const pokemonHtml = template({ pokemon_team: pokemonData })
-  pokemonList.innerHTML = pokemonHtml
+  const otsHtml = template({ pokemonList })
+  otsContainerElement.innerHTML = otsHtml
 
-  return pokemonList
+  return otsContainerElement
 }
 
 function linkImage(name) {
@@ -62,7 +62,7 @@ function linkItem(name) {
 }
 
 function colorType(type) {
-  const type_colors = {
+  const typeColors = {
     'Normal': 'A8A77A',
     'Fire': 'EE8130',
     'Water': '6390F0',
@@ -86,8 +86,8 @@ function colorType(type) {
     '-1': 'AAAAAA'
   }
 
-  if (type in type_colors) {
-    return "#" + type_colors[type]
+  if (type in typeColors) {
+    return "#" + typeColors[type]
   } else {
     return "#AAAAAA"
   }
