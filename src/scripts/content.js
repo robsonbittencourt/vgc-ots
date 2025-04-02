@@ -51,10 +51,10 @@ function getOpponentTeam(container) {
 
 function repositionsOriginalElements(container) {
   var battleLog = battleLogElement(container)
-  battleLog.style.top = "260px"
+  battleLog.style.top = "215px"
 
   var userList = battleLog.parentNode.querySelector("ul.battle-userlist")
-  userList.style.top = "260px"
+  userList.style.top = "215px"
   userList.style.left = "640px"
 }
 

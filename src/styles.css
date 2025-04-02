@@ -1,6 +1,6 @@
 .pokemon-container {
   display: flex;
-  gap: 1px;
+  gap: 5px;
   position: absolute;
   left: 640px;
   z-index: 10;
@@ -16,7 +16,7 @@
 .image-container {
   position: relative;
   width: 80px;
-  height: 55px;
+  height: 60px;
 }
 
 .pokemon-image {
@@ -34,6 +34,15 @@
   z-index: 1;
   width: 26px;
   height: 26px;
+}
+
+.teraType {
+  font-size: 10px;
+  text-align: center;
+  padding: 2px;
+  border: 1px solid white;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .ability, 
