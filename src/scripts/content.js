@@ -1,6 +1,8 @@
 import { createOpenTeamSheetElement } from './ots-component.js';
 import { parseTeamSheet } from './team-sheet-parser.js';
 
+var teamboxSelector = '.infobox'
+
 async function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
     var userName = await getUsername()
@@ -9,6 +11,7 @@ async function updateTeamsheet() {
     if (container == null) return
 
     container.setAttribute("value", "done")
+    hideOriginalTeamSheets()
 
     repositionsOriginalElements(container)
 
@@ -27,7 +30,6 @@ async function getUsername() {
 }
 
 async function getOpponentContainer(userName) {
-  var teamboxSelector = '.infobox'
   await waitForElement(teamboxSelector)
 
   var constainers = Array.from(document.querySelectorAll(teamboxSelector))
@@ -41,6 +43,12 @@ async function getOpponentContainer(userName) {
 
     return teamUser != userName && !container.hasAttribute("value")
   })[0]
+}
+
+function hideOriginalTeamSheets() {
+  Array.from(document.querySelectorAll(teamboxSelector)).forEach(container => {
+    container.style.display = "none"
+  })
 }
 
 function getOpponentTeam(container) {
