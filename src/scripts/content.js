@@ -1,7 +1,7 @@
-import { createOpenTeamSheetElement } from './ots-component.js';
-import { parseTeamSheet } from './team-sheet-parser.js';
+import { createOpenTeamSheetElement } from "./ots-component.js"
+import { parseTeamSheet } from "./team-sheet-parser.js"
 
-const teamboxSelector = '.infobox'
+const teamboxSelector = ".infobox"
 
 async function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
@@ -24,7 +24,7 @@ async function updateTeamsheet() {
 }
 
 async function getUsername() {
-  const userNameElement = await waitForElement('span.usernametext')
+  const userNameElement = await waitForElement("span.usernametext")
 
   return userNameElement.textContent.trim()
 }
@@ -35,11 +35,11 @@ async function getOpponentContainer(userName) {
   const constainers = Array.from(document.querySelectorAll(teamboxSelector))
 
   return constainers.filter(container => {
-    const teamSheet = container.querySelector('details')
+    const teamSheet = container.querySelector("details")
 
     if (teamSheet == null) return
 
-    const teamUser = teamSheet.textContent.split('Open Team Sheet for ')[1].substring(0, userName.length)
+    const teamUser = teamSheet.textContent.split("Open Team Sheet for ")[1].substring(0, userName.length)
 
     return teamUser != userName && !container.hasAttribute("value")
   })[0]
@@ -52,8 +52,8 @@ function hideOriginalTeamSheets() {
 }
 
 function getOpponentTeam(container) {
-  const teamSheet = container.querySelector('details')
-  const enemysheet = teamSheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>')
+  const teamSheet = container.querySelector("details")
+  const enemysheet = teamSheet.innerHTML.split("Open Team Sheet for ")[1].split("<br>")
   return parseTeamSheet(enemysheet)
 }
 
@@ -78,10 +78,10 @@ async function waitForElement(selector) {
 
     const observer = new MutationObserver(() => {
       if (document.querySelector(selector)) {
-        observer.disconnect();
+        observer.disconnect()
         resolve(document.querySelector(selector))
       }
-    });
+    })
 
     observer.observe(document.body, {
       childList: true,
