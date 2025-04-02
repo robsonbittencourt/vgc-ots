@@ -30,7 +30,9 @@ const config = {
     new CopyPlugin({
       patterns: [
         { from: "manifest.json", to: "manifest.json" },
-        { from: "src/styles.css", to: "styles.css" }
+        { from: "src/styles.css", to: "styles.css" },
+        { from: "src/popup.html", to: "popup.html" },
+        { from: "images", to: "images" }
       ]
     })
   ]

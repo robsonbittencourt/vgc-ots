@@ -1,27 +1,35 @@
 <!doctype html>
 <html>
   <head>
-    <title>Pokemon Showdown Extension</title>
+    <title>VGC OTS</title>
     <style>
       body {
         width: 200px;
         padding: 10px;
         font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #E0E0E0, #A9C2E2);
+        color: #333;
       }
-      button {
-        margin-top: 10px;
+
+      h3 {
+        color: #4A6572;
+      }
+
+      a {
+        color: #2E86C1;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <h3>Pokemon Showdown</h3>
-    <button id="injectButton">Inject Content Script</button>
-    <script>
-      document.getElementById("injectButton").addEventListener("click", () => {
-        chrome.tabs.executeScript({
-          file: "content.js"
-        })
-      })
-    </script>
+    <h3>VGC OTS</h3>
+    <label>Show Open Team Sheets on Pokemon Showdown</label>
+
+    <p>Meet a damage calculator focused on VGC</p>
+    <a href="https://vgcmulticalc.com" target="_blank">VGC Multi Calc</a>
   </body>
 </html>
