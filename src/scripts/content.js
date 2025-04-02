@@ -1,12 +1,12 @@
 import { createOpenTeamSheetElement } from './ots-component.js';
 import { parseTeamSheet } from './team-sheet-parser.js';
 
-var teamboxSelector = '.infobox'
+const teamboxSelector = '.infobox'
 
 async function updateTeamsheet() {
   if (window.location.toString().includes("vgc")) {
-    var userName = await getUsername()
-    var container = await getOpponentContainer(userName)
+    const userName = await getUsername()
+    const container = await getOpponentContainer(userName)
 
     if (container == null) return
 
@@ -15,10 +15,10 @@ async function updateTeamsheet() {
 
     repositionsOriginalElements(container)
 
-    var pokemonTeam = getOpponentTeam(container)
-    var openTeamSheetElement = await createOpenTeamSheetElement(pokemonTeam)
+    const pokemonTeam = getOpponentTeam(container)
+    const openTeamSheetElement = await createOpenTeamSheetElement(pokemonTeam)
 
-    var battleLog = battleLogElement(container)
+    const battleLog = battleLogElement(container)
     battleLog.parentNode.insertBefore(openTeamSheetElement, battleLog)
   }
 }
@@ -32,14 +32,14 @@ async function getUsername() {
 async function getOpponentContainer(userName) {
   await waitForElement(teamboxSelector)
 
-  var constainers = Array.from(document.querySelectorAll(teamboxSelector))
+  const constainers = Array.from(document.querySelectorAll(teamboxSelector))
 
   return constainers.filter(container => {
-    var teamSheet = container.querySelector('details')
+    const teamSheet = container.querySelector('details')
 
     if (teamSheet == null) return
 
-    var teamUser = teamSheet.textContent.split('Open Team Sheet for ')[1].substring(0, userName.length)
+    const teamUser = teamSheet.textContent.split('Open Team Sheet for ')[1].substring(0, userName.length)
 
     return teamUser != userName && !container.hasAttribute("value")
   })[0]
@@ -52,16 +52,16 @@ function hideOriginalTeamSheets() {
 }
 
 function getOpponentTeam(container) {
-  var teamSheet = container.querySelector('details')
-  var enemysheet = teamSheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>')
+  const teamSheet = container.querySelector('details')
+  const enemysheet = teamSheet.innerHTML.split('Open Team Sheet for ')[1].split('<br>')
   return parseTeamSheet(enemysheet)
 }
 
 function repositionsOriginalElements(container) {
-  var battleLog = battleLogElement(container)
+  const battleLog = battleLogElement(container)
   battleLog.style.top = "215px"
 
-  var userList = battleLog.parentNode.querySelector("ul.battle-userlist")
+  const userList = battleLog.parentNode.querySelector("ul.battle-userlist")
   userList.style.top = "215px"
   userList.style.left = "640px"
 }

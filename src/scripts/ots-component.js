@@ -25,7 +25,7 @@ export async function createOpenTeamSheetElement(team) {
 }
 
 function imageLink(name) {
-  var imageName = name.toLowerCase()
+  let imageName = name.toLowerCase()
   imageName = imageName.replace(' ', '-')
   imageName = imageName.replace('calyrex-shadow', 'calyrex-shadow-rider')
   imageName = imageName.replace('calyrex-ice', 'calyrex-ice-rider')
