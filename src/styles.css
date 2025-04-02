@@ -3,9 +3,9 @@
   gap: 1px;
   position: absolute;
   left: 640px;
-  top: 13px;
   z-index: 10;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .pokemon-card {
@@ -16,25 +16,28 @@
 .image-container {
   position: relative;
   width: 80px;
-  height: 80px;
+  height: 55px;
 }
 
 .pokemon-image {
-  width: 80px;
-  height: 80px;
+  position: absolute;
+  left: 8px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .item-image {
   position: absolute;
-  top: 0px;
-  left: 40px;
+  top: 36px;
+  left: 56px;
   z-index: 1;
-  width: 30px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
 }
 
 .ability, 
 .move {
   margin-bottom: 2px;
-  font-size:10px;
+  font-size: 10px;
 }

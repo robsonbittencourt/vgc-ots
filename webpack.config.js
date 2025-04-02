@@ -1,5 +1,6 @@
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import CopyPlugin from 'copy-webpack-plugin';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -25,6 +26,14 @@ const config = {
   resolve: {
     extensions: ['.js']
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'manifest.json', to: 'manifest.json' },
+        { from: 'src/styles.css', to: 'styles.css' },
+      ],
+    }),
+  ],
 }
 
 export default config
