@@ -74,10 +74,10 @@ function getOpponentTeam(container) {
 
 function repositionsOriginalElements(roomBattle) {
   const battleLog = getElementSync(".battle-log", roomBattle)
-  battleLog.style.top = "215px"
+  battleLog.style.top = "240px"
 
   const userList = getElementSync("ul.battle-userlist", roomBattle)
-  userList.style.top = "215px"
+  userList.style.top = "240px"
   userList.style.left = "640px"
 }
 
