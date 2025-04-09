@@ -24,5 +24,10 @@
   ],
   "action": {
     "default_popup": "popup.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "vgc-ots@gmail.com"
+    }
   }
 }
