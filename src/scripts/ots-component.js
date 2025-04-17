@@ -1,8 +1,11 @@
 import template from "../ots-component.handlebars"
+import { Koffing } from "koffing"
 
-export async function createOpenTeamSheetElement(team) {
+export async function createOpenTeamSheetElement(pokePaste) {
   const otsContainerElement = document.createElement("div")
   otsContainerElement.className = "pokemon-container"
+
+  const team = Koffing.parse(pokePaste).teams[0].pokemon
 
   const pokemonList = team.map(pokemon => ({
     imageLink: imageLink(pokemon.name),

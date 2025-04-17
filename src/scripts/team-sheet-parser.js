@@ -1,5 +1,3 @@
-import { Koffing } from "koffing"
-
 export function parseTeamSheet(enemysheet) {
   let pokePasteLines = []
 
@@ -21,9 +19,7 @@ export function parseTeamSheet(enemysheet) {
     }
   }
 
-  const pokePaste = pokePasteLines.join("\n")
-
-  return Koffing.parse(pokePaste).teams[0].pokemon
+  return pokePasteLines.join("\n")
 }
 
 function parseMoves(pokePasteLines, enemysheet, currentIndex) {

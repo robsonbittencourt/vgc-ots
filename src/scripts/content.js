@@ -14,10 +14,37 @@ async function updateTeamsheet() {
   await hideOriginalTeamSheets(roomBattle)
   repositionsOriginalElements(roomBattle)
 
-  const pokemonTeam = getOpponentTeam(container)
-  const openTeamSheetElement = await createOpenTeamSheetElement(pokemonTeam)
+  const pokePaste = getOpponenPokePaste(container)
+
+  const openTeamSheetElement = await createOpenTeamSheetElement(pokePaste)
 
   roomBattle.appendChild(openTeamSheetElement)
+  createCopyButtonEvent(roomBattle)
+}
+
+function createCopyButtonEvent(roomBattle) {
+  const button = roomBattle.querySelector(".copy-button")
+  const textSpan = button.querySelector(".button-text")
+
+  button.addEventListener("click", () => {
+    copy()
+
+    textSpan.textContent = "Copied"
+    button.disabled = true
+
+    setTimeout(() => {
+      textSpan.textContent = "Copy"
+      button.disabled = false
+    }, 2000)
+  })
+}
+
+async function copy() {
+  const roomBattle = await getRoomBattle()
+  const container = await getOpponentContainer(roomBattle)
+  const pokePaste = getOpponenPokePaste(container)
+
+  navigator.clipboard.writeText(pokePaste)
 }
 
 async function getOpponentContainer(roomBattle) {
@@ -65,7 +92,7 @@ async function hideOriginalTeamSheets(roomBattle) {
   })
 }
 
-function getOpponentTeam(container) {
+function getOpponenPokePaste(container) {
   const teamSheet = getElementSync("details", container)
   const enemysheet = teamSheet.innerHTML.split("Open Team Sheet for ")[1].split("<br>")
 

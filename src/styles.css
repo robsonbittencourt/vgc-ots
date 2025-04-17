@@ -1,11 +1,16 @@
 .pokemon-container {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   position: absolute;
   left: 640px;
   z-index: 10;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.cards {
+  display: flex;
 }
 
 .pokemon-card {
@@ -50,4 +55,8 @@
 .move {
   margin-bottom: 2px;
   font-size: 10px;
+}
+
+.copy-button {
+  width: 80px;
 }
