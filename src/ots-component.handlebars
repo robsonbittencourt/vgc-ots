@@ -1,23 +1,30 @@
 <div class="cards">
-{{#each pokemonList}}
-  <div class="pokemon-card">
-    <div class="image-container">
-      {{#if itemLink}}
-        <img src="{{itemLink}}" alt="{{item}}" class="item-image" title="{{item}}" />
-      {{/if}}
-      <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image" title="{{name}}" />
+  {{#each pokemonList}}
+    <div class="pokemon-card">
+      <div class="image-container">
+        {{#if itemLink}}
+          <img src="{{itemLink}}" alt="{{item}}" class="item-image" title="{{item}}" />
+        {{/if}}
+        <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image" title="{{name}}" />
+      </div>
+      <p class="teraType" style="background-color:{{teraColor}}">{{tera}}</p>
+      <p class="ability"><strong>{{ability}}</strong></p>
+      <p class="move">{{move1}}</p>
+      <p class="move">{{move2}}</p>
+      <p class="move">{{move3}}</p>
+      <p class="move">{{move4}}</p>
     </div>
-    <p class="teraType" style="background-color:{{teraColor}}">{{tera}}</p>
-    <p class="ability"><strong>{{ability}}</strong></p>
-    <p class="move">{{move1}}</p>
-    <p class="move">{{move2}}</p>
-    <p class="move">{{move3}}</p>
-    <p class="move">{{move4}}</p>
-  </div>
-{{/each}}
+  {{/each}}
 </div>
 
-<button class="copy-button button">
-  <i class="fa fa-copy"></i>
-   <span class="button-text">Copy</span>
-</button>
+<div class="buttons">
+  <button class="copy-button button">
+    <i class="fa fa-copy"></i>
+    <span class="button-text">Copy</span>
+  </button>
+
+  <button class="change-player-button button">
+    <i class="fa fa-random"></i>
+    <span>Change Player</span>
+  </button>
+</div>

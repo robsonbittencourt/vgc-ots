@@ -57,6 +57,15 @@
   font-size: 10px;
 }
 
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
 .copy-button {
   width: 80px;
+}
+
+.change-player-button {
+  width: 120px;
 }
