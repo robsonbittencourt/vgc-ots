@@ -14,7 +14,6 @@ async function updateTeamsheet() {
   const container = await getContainer(roomBattle)
 
   await hideOriginalTeamSheets(roomBattle)
-  repositionsOriginalElements(roomBattle)
 
   const pokePaste = getPokePaste(container)
 
@@ -23,6 +22,8 @@ async function updateTeamsheet() {
   roomBattle.appendChild(openTeamSheetElement)
   createCopyButtonEvent(roomBattle)
   changePlayerButtonEvent(roomBattle)
+
+  repositionsOriginalElements(roomBattle)
 }
 
 function createCopyButtonEvent(roomBattle) {
@@ -115,11 +116,14 @@ function getPokePaste(container) {
 }
 
 function repositionsOriginalElements(roomBattle) {
+  const copyButtonTop = document.querySelector(".copy-button").getBoundingClientRect().top
+  const copyButtonTopPosition = `${copyButtonTop - 25}px`
+
   const battleLog = getElementSync(".battle-log", roomBattle)
-  battleLog.style.top = "240px"
+  battleLog.style.top = copyButtonTopPosition
 
   const userList = getElementSync("ul.battle-userlist", roomBattle)
-  userList.style.top = "240px"
+  userList.style.top = copyButtonTopPosition
   userList.style.left = "640px"
 }
 
