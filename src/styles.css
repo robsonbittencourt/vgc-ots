@@ -26,7 +26,7 @@
   align-items: center;
   position: relative;
   width: 100%;
-  height: 4em;
+  height: auto;
 }
 
 .pokemon-image {
@@ -37,12 +37,12 @@
 
 .item-image {
   position: absolute;
-  top: 2.7em;
+  top: 3em;
   left: 85%;
   transform: translateX(-50%);
   z-index: 1;
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
 }
 
 .teraType {
