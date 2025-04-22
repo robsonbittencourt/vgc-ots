@@ -14,7 +14,6 @@ async function updateTeamsheet() {
   const container = await getContainer(roomBattle)
 
   await hideOriginalTeamSheets(roomBattle)
-  repositionsOriginalElements(roomBattle)
 
   const pokePaste = getPokePaste(container)
 
@@ -23,6 +22,8 @@ async function updateTeamsheet() {
   roomBattle.appendChild(openTeamSheetElement)
   createCopyButtonEvent(roomBattle)
   changePlayerButtonEvent(roomBattle)
+
+  repositionsOriginalElements(roomBattle)
 }
 
 function createCopyButtonEvent(roomBattle) {
@@ -114,12 +115,15 @@ function getPokePaste(container) {
   return parseTeamSheet(enemysheet)
 }
 
-function repositionsOriginalElements(roomBattle) {
+async function repositionsOriginalElements(roomBattle) {
+  const container = getElementSync(".pokemon-container", roomBattle)
+  const containerHeigth = container.offsetHeight + 10
+
   const battleLog = getElementSync(".battle-log", roomBattle)
-  battleLog.style.top = "240px"
+  battleLog.style.top = `${containerHeigth}px`
 
   const userList = getElementSync("ul.battle-userlist", roomBattle)
-  userList.style.top = "240px"
+  userList.style.top = `${containerHeigth}px`
   userList.style.left = "640px"
 }
 
