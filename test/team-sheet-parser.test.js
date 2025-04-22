@@ -66,7 +66,9 @@ describe("Team Sheet Parser", () => {
       ""
     ]
 
-    const result = parseTeamSheet(rawInput).split("\n").map(line => line.trim())
+    const result = parseTeamSheet(rawInput)
+      .split("\n")
+      .map(line => line.trim())
 
     expect(result[0]).toBe("Incineroar (F) @ Assault Vest")
     expect(result[1]).toBe("Ability: Intimidate")
@@ -127,56 +129,56 @@ describe("Team Sheet Parser", () => {
     const rawInput = [
       'mk1989</summary><span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -40px -3090px"></span>',
       'Calyrex-Shadow @ Life Orb <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -216px -360px"></span>  ',
-      'Ability: As One (Spectrier)  ',
-      'Level: 50  ',
-      'Tera Type: Fairy  ',
-      '- Astral Barrage  ',
-      '- Psychic  ',
-      '- Protect  ',
+      "Ability: As One (Spectrier)  ",
+      "Level: 50  ",
+      "Tera Type: Fairy  ",
+      "- Astral Barrage  ",
+      "- Psychic  ",
+      "- Protect  ",
       '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -120px -3060px"></span>',
       'Zamazenta-Crowned @ Rusted Shield <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -264px -1032px"></span>  ',
-      'Ability: Dauntless Shield  ',
-      'Level: 50  ',
-      'Tera Type: Grass  ',
-      '- Wide Guard  ',
-      '- Body Press  ',
+      "Ability: Dauntless Shield  ",
+      "Level: 50  ",
+      "Tera Type: Grass  ",
+      "- Wide Guard  ",
+      "- Body Press  ",
       '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -160px -2220px"></span>',
       'Urshifu-Rapid-Strike (F) @ Choice Scarf <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -120px -96px"></span>  ',
-      'Ability: Unseen Fist  ',
-      'Level: 50  ',
-      'Tera Type: Ghost  ',
-      '- Surging Strikes  ',
+      "Ability: Unseen Fist  ",
+      "Level: 50  ",
+      "Tera Type: Ghost  ",
+      "- Surging Strikes  ",
       '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -240px -2490px"></span>',
       'Chien-Pao @ Focus Sash <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -168px -216px"></span>  ',
-      'Ability: Sword of Ruin  ',
-      'Level: 50  ',
-      'Tera Type: Ghost  ',
-      '- Ice Spinner  ',
-      '- Sacred Sword  ',
-      '- Sucker Punch  ',
-      '- Protect  ',
+      "Ability: Sword of Ruin  ",
+      "Level: 50  ",
+      "Tera Type: Ghost  ",
+      "- Ice Spinner  ",
+      "- Sacred Sword  ",
+      "- Sucker Punch  ",
+      "- Protect  ",
       '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -120px -1470px"></span>',
       'Amoonguss (F) @ Rocky Helmet <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -24px -624px"></span>  ',
-      'Ability: Regenerator  ',
-      'Level: 50  ',
-      'Tera Type: Water  ',
-      '- Rage Powder  ',
-      '- Spore  ',
-      '- Sludge Bomb  ',
-      '- Protect  ',
-      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -200px -1590px"></span>',
-      'Tornadus (M) @ Covert Cloak <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -336px -1104px"></span>  ',
-      'Ability: Prankster  ',
-      'Level: 50  ',
-      'Tera Type: Dark  ',
-      '- Tailwind  ',
-      '- Bleakwind Storm  ',
-      '- Rain Dance  ',
-      '- Taunt  ',
-      '</details>',
+      "Ability: Regenerator  ",
+      "Level: 50  ",
+      "Tera Type: Water  ",
+      "- Rage Powder  ",
+      "- Spore  ",
+      "- Sludge Bomb  ",
+      "- Protect  ",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -0px -330px"></span>',
+      'Ditto @ Focus Sash <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -168px -216px"></span>',
+      "Ability: Imposter",
+      "Level: 50",
+      "Tera Type: Ghost",
+      "- Transform",
+      "",
+      "</details>"
     ]
 
-    const result = parseTeamSheet(rawInput).split("\n").map(line => line.trim())
+    const result = parseTeamSheet(rawInput)
+      .split("\n")
+      .map(line => line.trim())
 
     expect(result[0]).toBe("Calyrex-Shadow @ Life Orb")
     expect(result[1]).toBe("Ability: As One (Spectrier)")
@@ -217,13 +219,10 @@ describe("Team Sheet Parser", () => {
     expect(result[36]).toBe("- Sludge Bomb")
     expect(result[37]).toBe("- Protect")
 
-    expect(result[39]).toBe("Tornadus (M) @ Covert Cloak")
-    expect(result[40]).toBe("Ability: Prankster")
+    expect(result[39]).toBe("Ditto @ Focus Sash")
+    expect(result[40]).toBe("Ability: Imposter")
     expect(result[41]).toBe("Level: 50")
-    expect(result[42]).toBe("Tera Type: Dark")
-    expect(result[43]).toBe("- Tailwind")
-    expect(result[44]).toBe("- Bleakwind Storm")
-    expect(result[45]).toBe("- Rain Dance")
-    expect(result[46]).toBe("- Taunt")
+    expect(result[42]).toBe("Tera Type: Ghost")
+    expect(result[43]).toBe("- Transform")
   })
 })

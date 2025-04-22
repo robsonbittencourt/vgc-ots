@@ -26,7 +26,7 @@ function parseMoves(pokePasteLines, enemysheet, currentIndex) {
   for (let i = 1; i <= 4; i++) {
     const moveLine = enemysheet[currentIndex + i]
 
-    if (moveLine.startsWith("- ")) {
+    if (moveLine && moveLine.startsWith("- ")) {
       pokePasteLines.push(moveLine)
     }
   }
