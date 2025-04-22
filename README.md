@@ -15,7 +15,7 @@ This version also features several differences from the original:
 
 ## Development
 
-To work locally in this project you'll using basically Html, CSS and Javascript. 
+To work locally in this project you'll using basically Html, CSS and Javascript.
 
 - Clone the project
 

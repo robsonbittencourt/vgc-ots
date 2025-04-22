@@ -44,7 +44,7 @@ function createCopyButtonEvent(roomBattle) {
 
 function changePlayerButtonEvent(roomBattle) {
   const button = roomBattle.querySelector(".change-player-button")
-  
+
   button.addEventListener("click", () => {
     changePlayer(player)
     getElementSync(".pokemon-container").remove()
@@ -68,7 +68,7 @@ async function getContainer(roomBattle) {
 
   if (players.includes(userName) && player == null) {
     changePlayer(players.indexOf(userName))
-  } 
+  }
 
   return containers[player]
 }
@@ -126,16 +126,16 @@ function repositionsOriginalElements(roomBattle) {
 function listenToBattleStart() {
   updateTeamsheet()
 
-  let currentUrl = window.location.href;
+  let currentUrl = window.location.href
 
   setInterval(() => {
     if (currentUrl !== window.location.href) {
-      currentUrl = window.location.href;
+      currentUrl = window.location.href
       if (currentUrl.includes("vgc")) {
         updateTeamsheet()
       }
     }
-  }, 500);
+  }, 500)
 }
 
 listenToBattleStart()
