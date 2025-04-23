@@ -1,6 +1,6 @@
 {
   "name": "vgc-ots",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "A extension to show Open Team Sheat in Pokémon Showdown",
   "main": "index.js",
   "type": "module",
