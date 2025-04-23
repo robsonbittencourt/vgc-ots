@@ -32,15 +32,25 @@ function imageLink(name) {
   imageName = imageName.replace(" ", "-")
   imageName = imageName.replace("calyrex-shadow", "calyrex-shadow-rider")
   imageName = imageName.replace("calyrex-ice", "calyrex-ice-rider")
+  imageName = imageName.replace("urshifu-rapid-strike", "urshifu")
   imageName = imageName.replace(/-f$/, "-female")
   imageName = imageName.replace("-hisui", "-hisuian")
   imageName = imageName.replace("-alola", "-alolan")
   imageName = imageName.replace("-galar", "-galarian")
-  imageName = imageName.replace("rockruff-dusk", "rockruff")
-  imageName = imageName.replace("polteageist-antique", "polteageist")
-  imageName = imageName.replace("urshifu-rapid-strike", "urshifu")
+
+  if (imageName.includes("-")) {
+    const onlyName = imageName.substring(0, imageName.indexOf("-"))
+
+    if (pokemonWithAlternativeForm().includes(onlyName)) {
+      imageName = onlyName
+    }
+  }
 
   return "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imageName + ".png"
+}
+
+function pokemonWithAlternativeForm() {
+  return ["rockruff", "polteageist", "sinistea", "sinistcha", "vivillon", "alcremie", "dudunsparce", "pikachu", "flabébé", "floette", "florges", "squawkabilly", "maushold", "tatsugiri"]
 }
 
 function itemLink(name) {
