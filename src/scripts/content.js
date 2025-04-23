@@ -4,20 +4,18 @@ import { parseTeamSheet } from "./team-sheet-parser.js"
 
 const teamboxSelector = ".infobox"
 
-let player = null
-
-async function updateTeamsheet() {
+async function updateTeamSheet() {
   const roomBattle = await getRoomBattle()
 
   if (getElementSync(".pokemon-container", roomBattle)) return
 
-  const container = await getContainer(roomBattle)
+  const watchBattle = await isWatchBattle(roomBattle)
+  const container = await getContainer(roomBattle, watchBattle)
 
   await hideOriginalTeamSheets(roomBattle)
 
   const pokePaste = getPokePaste(container)
-
-  const openTeamSheetElement = await createOpenTeamSheetElement(pokePaste)
+  const openTeamSheetElement = await createOpenTeamSheetElement(pokePaste, watchBattle)
 
   roomBattle.appendChild(openTeamSheetElement)
   createCopyButtonEvent(roomBattle)
@@ -44,12 +42,13 @@ function createCopyButtonEvent(roomBattle) {
 }
 
 function changePlayerButtonEvent(roomBattle) {
-  const button = roomBattle.querySelector(".change-player-button")
+  const button = roomBattle.querySelector(".switch-player-button")
+
+  if (!button) return
 
   button.addEventListener("click", () => {
-    changePlayer(player)
-    getElementSync(".pokemon-container").remove()
-    updateTeamsheet()
+    getElementSync(".pokemon-container", roomBattle).remove()
+    updateTeamSheet()
   })
 }
 
@@ -61,27 +60,47 @@ async function copy() {
   navigator.clipboard.writeText(pokePaste)
 }
 
-async function getContainer(roomBattle) {
-  const userName = await getUsername()
+async function getContainer(roomBattle, watchBattle) {
   const containers = Array.from(await getAllElements(teamboxSelector, roomBattle))
 
-  const players = roomBattle.querySelector(".chat small").textContent.replace(/☆/g, "").replace(" joined", "").split(" and ")
+  if (watchBattle) {
+    const playerIndex = containers.findIndex(c => c.getAttribute("active") === "true")
 
-  if (players.includes(userName) && player == null) {
-    changePlayer(players.indexOf(userName))
+    if (playerIndex === -1) {
+      containers[0].setAttribute("active", true)
+      containers[1].setAttribute("active", false)
+      return containers[0]
+    } else {
+      const anotherIndex = playerIndex === 0 ? 1 : 0
+      containers[playerIndex].setAttribute("active", false)
+      containers[anotherIndex].setAttribute("active", true)
+
+      return containers[anotherIndex]
+    }
   }
 
-  return containers[player]
+  const players = await getPlayers(roomBattle)
+  const userName = await getUsername()
+  const opponentIndex = players.indexOf(userName) === 0 ? 1 : 0
+
+  return containers[opponentIndex]
+}
+
+async function isWatchBattle(roomBattle) {
+  const userName = await getUsername()
+  const players = await getPlayers(roomBattle)
+  return !players.includes(userName)
+}
+
+async function getPlayers(roomBattle) {
+  const chat = await getElement(".chat small", roomBattle)
+  return chat.textContent.replace(/☆/g, "").replace(" joined", "").split(" and ")
 }
 
 async function getUsername() {
   const userNameElement = await getElement("span.usernametext")
 
   return userNameElement.textContent.trim()
-}
-
-function changePlayer(actualPlayer) {
-  player = actualPlayer === 0 ? 1 : 0
 }
 
 function extractBattleId(url) {
@@ -128,7 +147,7 @@ async function repositionsOriginalElements(roomBattle) {
 }
 
 function listenToBattleStart() {
-  updateTeamsheet()
+  updateTeamSheet()
 
   let currentUrl = window.location.href
 
@@ -136,7 +155,7 @@ function listenToBattleStart() {
     if (currentUrl !== window.location.href) {
       currentUrl = window.location.href
       if (currentUrl.includes("vgc")) {
-        updateTeamsheet()
+        updateTeamSheet()
       }
     }
   }, 500)

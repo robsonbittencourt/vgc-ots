@@ -23,8 +23,10 @@
     <span class="button-text">Copy</span>
   </button>
 
-  <button class="change-player-button button">
-    <i class="fa fa-random"></i>
-    <span>Change Player</span>
-  </button>
+  {{#if watchBattle}}
+    <button class="switch-player-button button">
+      <i class="fa fa-random"></i>
+      <span>Switch player</span>
+    </button>
+  {{/if}}
 </div>

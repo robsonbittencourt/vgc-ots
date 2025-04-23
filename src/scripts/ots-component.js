@@ -1,7 +1,7 @@
 import template from "../ots-component.handlebars"
 import { Koffing } from "koffing"
 
-export async function createOpenTeamSheetElement(pokePaste) {
+export async function createOpenTeamSheetElement(pokePaste, watchBattle) {
   const otsContainerElement = document.createElement("div")
   otsContainerElement.className = "pokemon-container"
 
@@ -21,7 +21,7 @@ export async function createOpenTeamSheetElement(pokePaste) {
     item: pokemon.item
   }))
 
-  const otsHtml = template({ pokemonList })
+  const otsHtml = template({ pokemonList, watchBattle })
   otsContainerElement.innerHTML = otsHtml
 
   return otsContainerElement
