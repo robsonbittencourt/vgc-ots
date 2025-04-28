@@ -14,14 +14,19 @@ async function updateTeamSheet() {
 
   await hideOriginalTeamSheets(roomBattle)
 
-  const pokePaste = getPokePaste(container)
-  const openTeamSheetElement = await createOpenTeamSheetElement(pokePaste, watchBattle)
+  try {
+    const pokePaste = getPokePaste(container)
+    const openTeamSheetElement = await createOpenTeamSheetElement(pokePaste, watchBattle)
 
-  roomBattle.appendChild(openTeamSheetElement)
-  createCopyButtonEvent(roomBattle)
-  changePlayerButtonEvent(roomBattle)
+    roomBattle.appendChild(openTeamSheetElement)
+    createCopyButtonEvent(roomBattle)
+    changePlayerButtonEvent(roomBattle)
 
-  repositionsOriginalElements(roomBattle)
+    repositionsOriginalElements(roomBattle)
+  } catch (ex) {
+    showOriginalTeamSheets(roomBattle)
+    throw ex
+  }
 }
 
 function createCopyButtonEvent(roomBattle) {
@@ -124,6 +129,13 @@ async function hideOriginalTeamSheets(roomBattle) {
   const elements = await getAllElements(teamboxSelector, roomBattle)
   Array.from(elements).forEach(container => {
     container.style.display = "none"
+  })
+}
+
+async function showOriginalTeamSheets(roomBattle) {
+  const elements = await getAllElements(teamboxSelector, roomBattle)
+  Array.from(elements).forEach(container => {
+    container.style.display = "block"
   })
 }
 
