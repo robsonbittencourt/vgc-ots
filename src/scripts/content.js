@@ -129,7 +129,7 @@ async function hideOriginalTeamSheets(roomBattle) {
 
 function getPokePaste(container) {
   const teamSheet = getElementSync("details", container)
-  const enemysheet = teamSheet.innerHTML.split("Open Team Sheet for ")[1].split("<br>")
+  const enemysheet = teamSheet.innerHTML.split("Open team sheet for ")[1].split("<br>")
 
   return parseTeamSheet(enemysheet)
 }
