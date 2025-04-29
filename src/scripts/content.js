@@ -98,8 +98,8 @@ async function isWatchBattle(roomBattle) {
 }
 
 async function getPlayers(roomBattle) {
-  const chat = await getElement(".chat small", roomBattle)
-  return chat.textContent.replace(/☆/g, "").replace(" joined", "").split(" and ")
+  const columns = await getAllElements(".chat table tr:first-child td", roomBattle)
+  return Array.from(columns).map(c => c.textContent.trim())
 }
 
 async function getUsername() {
