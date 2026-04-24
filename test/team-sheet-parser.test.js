@@ -125,6 +125,118 @@ describe("Team Sheet Parser", () => {
     expect(result[52]).toBe("- Heat Wave")
   })
 
+  it("should parse html team sheet without Tera Type (Champions format) to paste format", () => {
+    const rawInput = [
+      'sorcerer_rs_3</summary><span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -360px -0px"></span>',
+      'Blastoise (M) @ Blastoisinite <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -168px -864px"></span>',
+      "Ability: Rain Dish",
+      "Level: 50",
+      "- Fake Out",
+      "- Water Spout",
+      "- Dark Pulse",
+      "- Aura Sphere",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -440px -2430px"></span>',
+      'Kingambit (M) @ Chople Berry <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -168px -96px"></span>',
+      "Ability: Defiant",
+      "Level: 50",
+      "- Iron Head",
+      "- Kowtow Cleave",
+      "- Low Kick",
+      "- Sucker Punch",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -320px -600px"></span>',
+      'Tyranitar (M) @ Tyranitarite <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -360px -888px"></span>',
+      "Ability: Sand Stream",
+      "Level: 50",
+      "- Protect",
+      "- Rock Slide",
+      "- Knock Off",
+      "- Superpower",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -200px -2520px"></span>',
+      'Sinistcha @ Occa Berry <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -168px -456px"></span>',
+      "Ability: Hospitality",
+      "Level: 50",
+      "- Rage Powder",
+      "- Matcha Gotcha",
+      "- Life Dew",
+      "- Trick Room",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -360px -2430px"></span>',
+      'Farigiraf (M) @ Sitrus Berry <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -0px -672px"></span>',
+      "Ability: Armor Tail",
+      "Level: 50",
+      "- Psychic",
+      "- Rain Dance",
+      "- Low Kick",
+      "- Trick Room",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -80px -2250px"></span>',
+      'Basculegion (M) @ Choice Scarf <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -120px -96px"></span>',
+      "Ability: Adaptability",
+      "Level: 50",
+      "- Flip Turn",
+      "- Wave Crash",
+      "- Last Respects",
+      "- Aqua Jet",
+      "",
+      ""
+    ]
+
+    const result = parseTeamSheet(rawInput)
+      .split("\n")
+      .map(line => line.trim())
+
+    expect(result[0]).toBe("Blastoise (M) @ Blastoisinite")
+    expect(result[1]).toBe("Ability: Rain Dish")
+    expect(result[2]).toBe("Level: 50")
+    expect(result[3]).toBe("- Fake Out")
+    expect(result[4]).toBe("- Water Spout")
+    expect(result[5]).toBe("- Dark Pulse")
+    expect(result[6]).toBe("- Aura Sphere")
+
+    expect(result[8]).toBe("Kingambit (M) @ Chople Berry")
+    expect(result[9]).toBe("Ability: Defiant")
+    expect(result[10]).toBe("Level: 50")
+    expect(result[11]).toBe("- Iron Head")
+    expect(result[12]).toBe("- Kowtow Cleave")
+    expect(result[13]).toBe("- Low Kick")
+    expect(result[14]).toBe("- Sucker Punch")
+
+    expect(result[16]).toBe("Tyranitar (M) @ Tyranitarite")
+    expect(result[17]).toBe("Ability: Sand Stream")
+    expect(result[18]).toBe("Level: 50")
+    expect(result[19]).toBe("- Protect")
+    expect(result[20]).toBe("- Rock Slide")
+    expect(result[21]).toBe("- Knock Off")
+    expect(result[22]).toBe("- Superpower")
+
+    expect(result[24]).toBe("Sinistcha @ Occa Berry")
+    expect(result[25]).toBe("Ability: Hospitality")
+    expect(result[26]).toBe("Level: 50")
+    expect(result[27]).toBe("- Rage Powder")
+    expect(result[28]).toBe("- Matcha Gotcha")
+    expect(result[29]).toBe("- Life Dew")
+    expect(result[30]).toBe("- Trick Room")
+
+    expect(result[32]).toBe("Farigiraf (M) @ Sitrus Berry")
+    expect(result[33]).toBe("Ability: Armor Tail")
+    expect(result[34]).toBe("Level: 50")
+    expect(result[35]).toBe("- Psychic")
+    expect(result[36]).toBe("- Rain Dance")
+    expect(result[37]).toBe("- Low Kick")
+    expect(result[38]).toBe("- Trick Room")
+
+    expect(result[40]).toBe("Basculegion (M) @ Choice Scarf")
+    expect(result[41]).toBe("Ability: Adaptability")
+    expect(result[42]).toBe("Level: 50")
+    expect(result[43]).toBe("- Flip Turn")
+    expect(result[44]).toBe("- Wave Crash")
+    expect(result[45]).toBe("- Last Respects")
+    expect(result[46]).toBe("- Aqua Jet")
+  })
+
   it("should parse html team sheet with some Pokémon with less than 4 attacks to paste format", () => {
     const rawInput = [
       'mk1989</summary><span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v18) no-repeat scroll -40px -3090px"></span>',

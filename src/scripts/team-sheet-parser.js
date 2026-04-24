@@ -11,6 +11,10 @@ export function parseTeamSheet(enemysheet) {
 
     if (line.includes("Level:")) {
       pokePasteLines.push(line)
+
+      if (enemysheet[index + 1] && enemysheet[index + 1].startsWith("- ")) {
+        parseMoves(pokePasteLines, enemysheet, index)
+      }
     }
 
     if (line.includes("Tera Type:")) {

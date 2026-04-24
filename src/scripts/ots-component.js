@@ -9,7 +9,9 @@ export async function createOpenTeamSheetElement(pokePaste, watchBattle) {
 
   const pokemonList = team.map(pokemon => ({
     imageLink: imageLink(pokemon.name),
+    fallbackImageLink: fallbackImageLink(pokemon.name),
     itemLink: itemLink(pokemon.item),
+    fallbackItemLink: fallbackItemLink(pokemon.item),
     teraColor: colorType(pokemon.teraType),
     tera: pokemon.teraType,
     ability: pokemon.ability,
@@ -27,7 +29,7 @@ export async function createOpenTeamSheetElement(pokePaste, watchBattle) {
   return otsContainerElement
 }
 
-function imageLink(name) {
+function normalizeImageName(name) {
   let imageName = name.toLowerCase()
   imageName = imageName.replace(" ", "-")
   imageName = imageName.replace("calyrex-shadow", "calyrex-shadow-rider")
@@ -38,7 +40,7 @@ function imageLink(name) {
   imageName = imageName.replace("-alola", "-alolan")
   imageName = imageName.replace("-galar", "-galarian")
 
-  if (imageName.includes("-")) {
+  if (imageName.includes("-") && !pokemonKeepFullForm().includes(imageName)) {
     const onlyName = imageName.substring(0, imageName.indexOf("-"))
 
     if (pokemonWithAlternativeForm().includes(onlyName)) {
@@ -46,16 +48,73 @@ function imageLink(name) {
     }
   }
 
+  return imageName
+}
+
+function imageLink(name) {
+  const imageName = normalizeImageName(name)
+
+  if (pokemonWithoutSvSprite().includes(imageName)) {
+    return "https://img.pokemondb.net/sprites/bank/normal/" + imageName + ".png"
+  }
+
   return "https://img.pokemondb.net/sprites/scarlet-violet/normal/" + imageName + ".png"
 }
 
+function fallbackImageLink(name) {
+  return "https://img.pokemondb.net/sprites/bank/normal/" + normalizeImageName(name) + ".png"
+}
+
+function pokemonWithoutSvSprite() {
+  return [
+    "absol", "aerodactyl", "aegislash", "aggron", "alakazam", "aromatisse",
+    "audino", "aurorus", "beedrill", "castform", "cofagrigus", "diggersby",
+    "drampa", "emolga", "furfrou", "garbodor", "gourgeist", "heliolisk",
+    "kangaskhan", "liepard", "lopunny", "machamp", "manectric", "pangoro",
+    "pidgeot", "pinsir", "roserade", "runerigus", "sharpedo", "simipour",
+    "simisage", "simisear", "slurpuff", "starmie", "steelix", "stunfisk",
+    "tyrantrum", "vanilluxe", "watchog"
+  ]
+}
+
 function pokemonWithAlternativeForm() {
-  return ["rockruff", "polteageist", "sinistea", "sinistcha", "vivillon", "alcremie", "dudunsparce", "pikachu", "flabébé", "floette", "florges", "squawkabilly", "maushold", "tatsugiri"]
+  return ["rockruff", "polteageist", "sinistea", "sinistcha", "vivillon", "alcremie", "dudunsparce", "pikachu", "flabebe", "floette", "florges", "squawkabilly", "maushold", "tatsugiri"]
+}
+
+function pokemonKeepFullForm() {
+  return ["floette-eternal"]
+}
+
+function normalizeItemName(name) {
+  return name.replace(/ /g, "").toLowerCase()
 }
 
 function itemLink(name) {
   if (name) {
-    return "https://www.serebii.net/itemdex/sprites/sv/" + name.replace(" ", "").toLowerCase() + ".png"
+    const itemName = normalizeItemName(name)
+    const base = megaStones().includes(itemName) ? "za" : "sv"
+    return `https://www.serebii.net/itemdex/sprites/${base}/${itemName}.png`
+  }
+}
+
+function megaStones() {
+  return [
+    "abomasite", "absolite", "aerodactylite", "aggronite", "alakazite", "altarianite",
+    "ampharosite", "audinite", "banettite", "beedrillite", "blastoisinite", "cameruptite",
+    "chandelurite", "chesnaughtite", "chimechite", "clefablite", "crabominite", "delphoxite",
+    "dragoninite", "drampanite", "emboarite", "excadrite", "feraligite", "floettite",
+    "froslassite", "galladite", "garchompite", "gardevoirite", "gengarite", "glalitite",
+    "glimmoranite", "golurkite", "greninjite", "gyaradosite", "hawluchanite", "heracronite",
+    "houndoominite", "kangaskhanite", "lopunnite", "lucarionite", "manectite", "medichamite",
+    "meganiumite", "meowsticite", "pidgeotite", "pinsirite", "sablenite", "scizorite",
+    "scovillainite", "sharpedonite", "skarmorite", "slowbronite", "starminite", "steelixite",
+    "tyranitarite", "venusaurite", "victreebelite"
+  ]
+}
+
+function fallbackItemLink(name) {
+  if (name) {
+    return "https://www.serebii.net/itemdex/sprites/za/" + normalizeItemName(name) + ".png"
   }
 }
 

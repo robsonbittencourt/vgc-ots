@@ -3,11 +3,11 @@
     <div class="pokemon-card">
       <div class="image-container">
         {{#if itemLink}}
-          <img src="{{itemLink}}" alt="{{item}}" class="item-image" title="{{item}}" />
+          <img src="{{itemLink}}" alt="{{item}}" class="item-image" title="{{item}}" onerror="this.src='{{fallbackItemLink}}'; this.onerror=null;" />
         {{/if}}
-        <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image" title="{{name}}" />
+        <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image" title="{{name}}" onerror="this.src='{{fallbackImageLink}}'; this.onerror=null;" />
       </div>
-      <p class="teraType" style="background-color:{{teraColor}}">{{tera}}</p>
+      {{#if tera}}<p class="teraType" style="background-color:{{teraColor}}">{{tera}}</p>{{/if}}
       <p class="ability"><strong>{{ability}}</strong></p>
       <p class="move">{{move1}}</p>
       <p class="move">{{move2}}</p>
