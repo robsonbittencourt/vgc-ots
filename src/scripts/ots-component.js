@@ -15,6 +15,7 @@ export async function createOpenTeamSheetElement(pokePaste, watchBattle) {
     teraColor: colorType(pokemon.teraType),
     tera: pokemon.teraType,
     ability: pokemon.ability,
+    nature: pokemon.nature,
     move1: pokemon.moves[0],
     move2: pokemon.moves[1],
     move3: pokemon.moves[2],

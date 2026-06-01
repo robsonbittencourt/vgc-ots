@@ -8,6 +8,7 @@
         <img src="{{imageLink}}" alt="{{name}}" class="pokemon-image" title="{{name}}" onerror="this.src='{{fallbackImageLink}}'; this.onerror=null;" />
       </div>
       {{#if tera}}<p class="teraType" style="background-color:{{teraColor}}">{{tera}}</p>{{/if}}
+      {{#if nature}}<p class="nature">{{nature}}</p>{{/if}}
       <p class="ability"><strong>{{ability}}</strong></p>
       <p class="move">{{move1}}</p>
       <p class="move">{{move2}}</p>

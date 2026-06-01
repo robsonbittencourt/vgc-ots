@@ -21,6 +21,10 @@ export function parseTeamSheet(enemysheet) {
       pokePasteLines.push(line)
       parseMoves(pokePasteLines, enemysheet, index)
     }
+
+    if (line.includes("Nature")) {
+      pokePasteLines.push(line)
+    }
   }
 
   return pokePasteLines.join("\n")
