@@ -125,6 +125,130 @@ describe("Team Sheet Parser", () => {
     expect(result[52]).toBe("- Heat Wave")
   })
 
+  it("should parse html team sheet with Nature to paste format", () => {
+    const rawInput = [
+      'player1</summary><span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -280px -1800px"></span>',
+      'Garchomp (M) @ Bright Powder <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -0px -0px"></span>',
+      "Ability: Sand Veil",
+      "Jolly Nature",
+      "Level: 50",
+      "- Poison Jab",
+      "- Dragon Claw",
+      "- Stomping Tantrum",
+      "- Protect",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -320px -600px"></span>',
+      'Tyranitar (F) @ Choice Scarf <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -120px -96px"></span>',
+      "Ability: Sand Stream",
+      "Adamant Nature",
+      "Level: 50",
+      "- Knock Off",
+      "- Rock Slide",
+      "- Payback",
+      "- Protect",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -0px -0px"></span>',
+      'Steelix (F) @ Steelixite <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -0px -0px"></span>',
+      "Ability: Rock Head",
+      "Careful Nature",
+      "Level: 50",
+      "- Body Press",
+      "- Body Slam",
+      "- High Horsepower",
+      "- Wide Guard",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -160px -2700px"></span>',
+      'Rotom-Wash @ Magnet <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -0px -0px"></span>',
+      "Ability: Levitate",
+      "Serious Nature",
+      "Level: 50",
+      "- Protect",
+      "- Thunderbolt",
+      "- Hydro Pump",
+      "- Light Screen",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -200px -2520px"></span>',
+      'Sinistcha @ Leftovers <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -48px -360px"></span>',
+      "Ability: Hospitality",
+      "Bold Nature",
+      "Level: 50",
+      "- Matcha Gotcha",
+      "- Life Dew",
+      "- Trick Room",
+      "- Rage Powder",
+      "",
+      '<span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -0px -0px"></span>',
+      'Talonflame (M) @ Sharp Beak <span class="itemicon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/itemicons-sheet.png?v1) no-repeat scroll -0px -0px"></span>',
+      "Ability: Gale Wings",
+      "Jolly Nature",
+      "Level: 50",
+      "- Tailwind",
+      "- Flare Blitz",
+      "- Brave Bird",
+      "- Protect",
+      "",
+      ""
+    ]
+
+    const result = parseTeamSheet(rawInput)
+      .split("\n")
+      .map(line => line.trim())
+
+    expect(result[0]).toBe("Garchomp (M) @ Bright Powder")
+    expect(result[1]).toBe("Ability: Sand Veil")
+    expect(result[2]).toBe("Jolly Nature")
+    expect(result[3]).toBe("Level: 50")
+    expect(result[4]).toBe("- Poison Jab")
+    expect(result[5]).toBe("- Dragon Claw")
+    expect(result[6]).toBe("- Stomping Tantrum")
+    expect(result[7]).toBe("- Protect")
+
+    expect(result[9]).toBe("Tyranitar (F) @ Choice Scarf")
+    expect(result[10]).toBe("Ability: Sand Stream")
+    expect(result[11]).toBe("Adamant Nature")
+    expect(result[12]).toBe("Level: 50")
+    expect(result[13]).toBe("- Knock Off")
+    expect(result[14]).toBe("- Rock Slide")
+    expect(result[15]).toBe("- Payback")
+    expect(result[16]).toBe("- Protect")
+
+    expect(result[18]).toBe("Steelix (F) @ Steelixite")
+    expect(result[19]).toBe("Ability: Rock Head")
+    expect(result[20]).toBe("Careful Nature")
+    expect(result[21]).toBe("Level: 50")
+    expect(result[22]).toBe("- Body Press")
+    expect(result[23]).toBe("- Body Slam")
+    expect(result[24]).toBe("- High Horsepower")
+    expect(result[25]).toBe("- Wide Guard")
+
+    expect(result[27]).toBe("Rotom-Wash @ Magnet")
+    expect(result[28]).toBe("Ability: Levitate")
+    expect(result[29]).toBe("Serious Nature")
+    expect(result[30]).toBe("Level: 50")
+    expect(result[31]).toBe("- Protect")
+    expect(result[32]).toBe("- Thunderbolt")
+    expect(result[33]).toBe("- Hydro Pump")
+    expect(result[34]).toBe("- Light Screen")
+
+    expect(result[36]).toBe("Sinistcha @ Leftovers")
+    expect(result[37]).toBe("Ability: Hospitality")
+    expect(result[38]).toBe("Bold Nature")
+    expect(result[39]).toBe("Level: 50")
+    expect(result[40]).toBe("- Matcha Gotcha")
+    expect(result[41]).toBe("- Life Dew")
+    expect(result[42]).toBe("- Trick Room")
+    expect(result[43]).toBe("- Rage Powder")
+
+    expect(result[45]).toBe("Talonflame (M) @ Sharp Beak")
+    expect(result[46]).toBe("Ability: Gale Wings")
+    expect(result[47]).toBe("Jolly Nature")
+    expect(result[48]).toBe("Level: 50")
+    expect(result[49]).toBe("- Tailwind")
+    expect(result[50]).toBe("- Flare Blitz")
+    expect(result[51]).toBe("- Brave Bird")
+    expect(result[52]).toBe("- Protect")
+  })
+
   it("should parse html team sheet without Tera Type (Champions format) to paste format", () => {
     const rawInput = [
       'sorcerer_rs_3</summary><span class="picon" style="background:transparent url(https://play.pokemonshowdown.com/sprites/pokemonicons-sheet.png?v21) no-repeat scroll -360px -0px"></span>',
